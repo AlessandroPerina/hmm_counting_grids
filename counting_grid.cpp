@@ -14,7 +14,7 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z)
 		LW *= wdsize.at(0);
 
 	PWMatrix pi = randbase + (PWMatrix::Random(Z, L) + 1) / 2;
-	pi = pi.col
+	pi.colwise()  /= pi.colwise().sum();
 
 	PWMatrix h;
 }
@@ -24,14 +24,20 @@ counting_grid::~counting_grid()
 
 }
 
-int counting_grid::ind2usb(Coordinate pos)
+int counting_grid::ind2sub(vector<int> pos)
 {
-	int linear_index = (pos[1] - 1)*this->
+	int linear_index = pos[0];
+	int offset = this->cg_size[0];
 
+	for (int i = 1; i<pos.size(); i++)
+	{
+		linear_index += pos[i]*offset;
+		offset *= this->cg_size[i];
+	}
+	return linear_index;
 }
 
-Coordinate counting_grid(int)
+vector<int> counting_grid::sub2ind(int)
 {
-
 
 }
