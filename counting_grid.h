@@ -1,23 +1,27 @@
 #include <iostream>
+#include "general_header.h"
 
 class counting_grid
 {
 
 public:
-	matrixd pi;
-	matrixd h;
-	matrixd accumulator;
-	map<int*,int*> lookup; // position --> indeces of window
+	PWMatrix pi;
+	PWMatrix h;
+	map<int*,int*> position_lookup; // position --> indeces of window
 
-	int* cg_size;
-	int* wd_size;
+	vector<int> cg_size;
+	vector<int> wd_size;
 	int Z;
-	int T;
+	int L;
+	int LW;
 
-	counting_grid(int,int,int);
-	counting_grid();
+	counting_grid(vector<int>, vector<int>, int);
 	virtual ~counting_grid();
 
-	int* get_index_window(int*);
+	vector<int> get_index_window( vector<int> );
 	int sum_in_windows();
-}
+
+	// Utility functions
+	int ind2sub(vector<int>);
+	vector<int> sub2ind(int);
+};

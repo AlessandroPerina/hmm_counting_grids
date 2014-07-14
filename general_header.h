@@ -6,6 +6,7 @@
 #include <map>
 #include <Eigen/Dense>
 #include <Eigen/SparseCore>
+#include <vector>
 
 using namespace Eigen;
 using namespace std;
@@ -16,9 +17,10 @@ class corpus;
 #define CGr 32
 #define CGw 32
 #define Wr 5
-#define Wr 6
+#define Wr 5
 
-typedef Matrix<double, Dynamic, Dynamic> matrixd; 
-typedef SparseMatrix<double> matrixs;
-typedef Array<double, Dyanmic, Dynamic> arrayd;
+typedef Matrix<double, Dynamic, Dynamic> DMatrix;
+typedef SparseMatrix<double> SMatrix;
+typedef Array<double, Dynamic, Dynamic> PWMatrix;
+
 
