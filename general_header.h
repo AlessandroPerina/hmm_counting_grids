@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <map>
+#include <algorithm>
 #include <Eigen/Dense>
 #include <Eigen/SparseCore>
 #include <vector>

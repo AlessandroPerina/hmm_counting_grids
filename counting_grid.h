@@ -13,6 +13,7 @@ public:
 	vector<int> wd_size;
 	int Z;
 	int L;
+	int D;
 	int LW;
 
 	counting_grid(vector<int>, vector<int>, int);

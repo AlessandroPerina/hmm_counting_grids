@@ -1,0 +1,20 @@
+	
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+
+		vector<int> pos;
+	int offset = 1;
+	for (vector<int>::reverse_iterator it = cg_size.rbegin(); it != cg_size.rend(); it++)
+	{
+		offset *= *it;
+		pos.push_back(linear_index / (L / offset));
+		linear_index -= offset;
+	}
+
+
+}
