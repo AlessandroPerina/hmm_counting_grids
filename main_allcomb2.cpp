@@ -24,6 +24,7 @@ int main(int argc, char** argv)
 		}
 	}
 
+
 	vector<int> positions;
 	for (int l=0; l<LW;l++)
 	{
@@ -31,11 +32,12 @@ int main(int argc, char** argv)
 		vector<int> tmppos(D);
 		for (int p = 0; p < D; p++)
 		{
-			tmppos[p] = ( l / offset ) % wd_size[p];
+			tmppos[p] = allcomb[p][( l / offset ) % wd_size[p]];
 			offset *= wd_size[p];
 		}
 		cout << tmppos[0] << " " << tmppos[1] << " " << tmppos[2] << endl;
 	}
 
+}
 
 }
