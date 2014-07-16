@@ -15,29 +15,23 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 	for (size_t i = 0; i < wdsize.size(); i++)
 		LW *= wdsize.at(0);
 
-	// Initialization of pi
-	int randbase = 0;
-	//pi = randbase + ((PWMatrix::Random(Z, L) + 1) / 2);
+	// Initialization of pi --> use BOOST random number generator 
+	int randbase = 3;
 	pi = randbase + ((PWMatrix::Random(Z, L) + 1) / 2);
+	/*
 	print(pi, cg_size, 0);
 	print(pi, cg_size, 1);
-
-	PWMatrix tmp = ( eps + pi.colwise().sum());
-	for (int i = 0; i < tmp.cols(); i++)
+	VectorXd tmp = (eps + pi.colwise().sum());
+	for (int i = 0; i < tmp.rows(); i++)
 		cout << tmp(i) << " ";
-
+	cout << endl;
+	*/
 	pi.rowwise() /= (eps + pi.colwise().sum());
-	print(pi, cg_size, 0);
-	print(pi, cg_size, 1);
-
-	// Initialization of h
-	h = PWMatrix::Zero(Z, L);
-	this->sum_in_windows(); // Warning. The object is still under construction, so be sure that you have created everything...
-	h.colwise() /= h.colwise().sum().transpose();
 	
 	// Intailize the hashmap
 	vector<int> pos;
-	vector< vector<int> > allcomb; 
+	vector< vector<int> > allcomb;
+
 	for (int l = 0; l < L; l++) // For every position in the grid
 	{
 		allcomb.clear(); // D x No_Indeces_per_window_dimension
@@ -49,6 +43,7 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 				allcomb[d].push_back((pos[d] + w) % cg_size[d]);
 			}
 		}
+
 		// l = (1,2,0), wd_size = (3,4,2)   => pos[0] = (1,2,3) - pos[1] = (2,3,4,5) - pos[2] = (0,1)
 		// Generate all the possible combinations of allcomb picking a value in each dimension of pos
 		vector<int> tmp_positions(LW);
@@ -66,6 +61,12 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 		// Add the linear positions of the indeces in the window at position l to the hashmap 
 		position_lookup.insert(pair <int, vector<int>>(l, tmp_positions));
 	}
+
+
+	// Initialization of h
+	h = PWMatrix::Zero(Z, L);
+	this->sum_in_windows(); // Warning. The object is still under construction, so be sure that you have created everything...
+	h.rowwise() /= (eps + h.colwise().sum());
 	
 }
 
@@ -101,7 +102,7 @@ vector<int> counting_grid::sub2ind(int linear_index)
 	{
 		offset *= *it;
 		dividi = (this->L / offset);
-		divisione_intera = (linear_index - 1) / dividi;
+		divisione_intera = linear_index / dividi;
 
 		pos.push_back(divisione_intera);
 		linear_index -= divisione_intera*dividi;
