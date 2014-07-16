@@ -78,7 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\counting_grid.cpp" />
-    <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\counting_grid.h" />
