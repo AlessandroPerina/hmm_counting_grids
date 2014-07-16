@@ -9,17 +9,17 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 	D = cgsize.size();
 	L = 1;
 	LW = 1;
-	for (int i = 0; i < cgsize.size(); i++)
+	for (size_t i = 0; i < cgsize.size(); i++)
 		L *= cgsize.at(0);
 
-	for (int i = 0; i < wdsize.size(); i++)
+	for (size_t i = 0; i < wdsize.size(); i++)
 		LW *= wdsize.at(0);
 
 	// Initialization of pi
 	int randbase = 3;
 	pi = randbase + (PWMatrix::Random(Z, L) + 1) / 2;
-	pi.colwise()  /= pi.colwise().sum();
-	
+	pi.colwise()  /= pi.colwise().sum().transpose();
+
 	// Initialization of h
 	h = PWMatrix::Zero(Z, L);
 
@@ -69,7 +69,7 @@ int counting_grid::ind2sub(vector<int> pos)
 	int linear_index = pos[0];
 	int offset = this->cg_size[0];
 
-	for (int i = 1; i<pos.size(); i++)
+	for (size_t i = 1; i<pos.size(); i++)
 	{
 		linear_index += pos[i]*offset;
 		offset *= this->cg_size[i];
@@ -105,7 +105,7 @@ int counting_grid::sum_in_windows()
 	{
 		for (int z = 0; z < this->Z; z++)
 		{
-			int accumulator = 0;
+			double accumulator = 0;
 			tmp_pos = this->position_lookup[l];
 			for (int i = 0; i < this->LW; i++)
 			{
