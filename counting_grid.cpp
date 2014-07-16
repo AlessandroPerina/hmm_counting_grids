@@ -30,17 +30,19 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 	
 	// Intailize the hashmap
 	vector<int> pos;
-	vector< vector<int> > allcomb;
+	vector< vector<int> > allcomb(D);
+	for (int d = 0; d < D; d++)
+		allcomb[d].resize(wd_size[d]);
 
 	for (int l = 0; l < L; l++) // For every position in the grid
 	{
-		allcomb.clear(); // D x No_Indeces_per_window_dimension
+		//allcomb.erase(allcomb.begin(),allcomb.end()); // D x No_Indeces_per_window_dimension
 		pos = this->sub2ind(l);
 		for (int d = 0; d < D; d++)
 		{
 			for (int w = 0; w < wd_size[d]; w++)
 			{
-				allcomb[d].push_back((pos[d] + w) % cg_size[d]);
+				allcomb[d][w] = ((pos[d] + w) % cg_size[d]);
 			}
 		}
 
@@ -62,12 +64,12 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 		position_lookup.insert(pair <int, vector<int>>(l, tmp_positions));
 	}
 
-
 	// Initialization of h
+	print(pi, cg_size, 0);
 	h = PWMatrix::Zero(Z, L);
 	this->sum_in_windows(); // Warning. The object is still under construction, so be sure that you have created everything...
+	print(h, cg_size, 0);
 	h.rowwise() /= (eps + h.colwise().sum());
-	
 }
 
 counting_grid::~counting_grid()
