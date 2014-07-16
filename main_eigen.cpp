@@ -35,6 +35,7 @@ int main( int argc, char** argv)
 
 	int a[]={0,1,2};
 	cout << "Er matricione: " << endl << m(0) << endl;
-		cout << "Er matricione: " << endl << m(1) << endl;
+	cout << "Er matricione: " << endl << m(1) << endl;
+	
 	return 0; // Il return standard e' 0! 
 }

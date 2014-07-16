@@ -10,6 +10,8 @@ int main(int argc, char** argv)
 	vector<int> pos(3);
 	pos = {1,2,1};
 
+	cout << "Pos: " << pos[1] << endl;
+
 	int linear_index = pos[0];
 	int offset = cg_size[0];
 

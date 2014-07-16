@@ -1,3 +1,6 @@
+#ifndef COUNTINGGRID_H
+#define COUNTINGGRID_H
+
 #include <iostream>
 #include "general_header.h"
 
@@ -24,4 +27,8 @@ public:
 	// Utility functions
 	int ind2sub(vector<int>);
 	vector<int> sub2ind(int);
+	int print();
+	int reshape_to_grid();
 };
+
+#endif

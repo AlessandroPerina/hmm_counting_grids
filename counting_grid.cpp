@@ -1,5 +1,5 @@
-#include "general_header.h"
 #include "counting_grid.h"
+#include "general_header.h"
 
 counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 {
@@ -22,7 +22,9 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 
 	// Initialization of h
 	h = PWMatrix::Zero(Z, L);
-
+	this->sum_in_windows(); // Warning. The object is still under construction, so be sure that you have created everything...
+	h.colwise() /= h.colwise().sum().transpose();
+	
 	// Intailize the hashmap
 	vector<int> pos;
 	vector< vector<int> > allcomb; 
@@ -55,13 +57,12 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 		position_lookup.insert(pair <int, vector<int>>(l, tmp_positions));
 	}
 	
-
-	PWMatrix h;
 }
 
 counting_grid::~counting_grid()
 {
-
+	delete &pi;
+	delete &h;
 }
 
 int counting_grid::ind2sub(vector<int> pos)
@@ -114,5 +115,22 @@ int counting_grid::sum_in_windows()
 			this->h(z,l) = accumulator;
 		}
 	}
-	return 1;
+	return 0;
+}
+
+int counting_grid::print()
+{
+	assert(this->D == 2 || this->D == 3);
+	Matrix<double, Dynamic, Dynamic> M(cg_size[0], cg_size[1]);
+	int locations_per_slice = this->L / *cg_size.end();
+
+	for (int s = 0; s < *cg_size.end(); s++)
+	{
+		for (int l = 0; l < locations_per_slice; l++)
+		{
+			
+		}
+	}
+
+	delete &M;
 }
