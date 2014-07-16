@@ -18,6 +18,7 @@ public:
 	int L;
 	int D;
 	int LW;
+	double eps;
 
 	counting_grid(vector<int>, vector<int>, int);
 	virtual ~counting_grid();
@@ -27,8 +28,7 @@ public:
 	// Utility functions
 	int ind2sub(vector<int>);
 	vector<int> sub2ind(int);
-	int print();
-	int reshape_to_grid();
+	static int print(DMatrix, vector<int>, int);
 };
 
 #endif

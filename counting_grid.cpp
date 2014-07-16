@@ -1,7 +1,7 @@
 #include "counting_grid.h"
 #include "general_header.h"
 
-counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
+counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init) : eps(0.0000001)
 {
 	cg_size = cgsize;
 	wd_size = wdsize;
@@ -16,9 +16,19 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 		LW *= wdsize.at(0);
 
 	// Initialization of pi
-	int randbase = 3;
-	pi = randbase + (PWMatrix::Random(Z, L) + 1) / 2;
-	pi.colwise()  /= pi.colwise().sum().transpose();
+	int randbase = 0;
+	//pi = randbase + ((PWMatrix::Random(Z, L) + 1) / 2);
+	pi = randbase + ((PWMatrix::Random(Z, L) + 1) / 2);
+	print(pi, cg_size, 0);
+	print(pi, cg_size, 1);
+
+	PWMatrix tmp = ( eps + pi.colwise().sum());
+	for (int i = 0; i < tmp.cols(); i++)
+		cout << tmp(i) << " ";
+
+	pi.rowwise() /= (eps + pi.colwise().sum());
+	print(pi, cg_size, 0);
+	print(pi, cg_size, 1);
 
 	// Initialization of h
 	h = PWMatrix::Zero(Z, L);
@@ -61,8 +71,9 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 
 counting_grid::~counting_grid()
 {
-	delete &pi;
-	delete &h;
+	pi.resize(0, 0);
+	h.resize(0, 0);
+	position_lookup.clear();
 }
 
 int counting_grid::ind2sub(vector<int> pos)
@@ -118,19 +129,46 @@ int counting_grid::sum_in_windows()
 	return 0;
 }
 
-int counting_grid::print()
+int counting_grid::print(DMatrix Minput, vector<int> siz, int z)
 {
-	assert(this->D == 2 || this->D == 3);
-	Matrix<double, Dynamic, Dynamic> M(cg_size[0], cg_size[1]);
-	int locations_per_slice = this->L / *cg_size.end();
+	int Z = Minput.rows();
+	int L = Minput.cols();
 
-	for (int s = 0; s < *cg_size.end(); s++)
+	assert(siz.size() == 2 || siz.size() == 3);
+	Matrix<double, Dynamic, Dynamic> M(siz[0], siz[1]);
+	int locations_per_slice;
+	int slices;
+	if (siz.size() == 3)
 	{
-		for (int l = 0; l < locations_per_slice; l++)
-		{
-			
-		}
+		locations_per_slice = L / siz.back();
+		slices = siz.back();
+	}
+	else
+	{
+		locations_per_slice = L;
+		slices = 1;
 	}
 
-	delete &M;
+	for (int s = 0; s < slices; s++) // or *(cg_size.end()-1) 
+	{
+		M.fill(0);
+		for (int l = 0; l < locations_per_slice; l++)
+		{
+			M(l) = (double)Minput(z, l + s*locations_per_slice );
+		}
+		
+		for (int r = 0; r < siz[0]; r++)
+		{
+			for (int c = 0; c < siz[1]; c++)
+			{
+				cout << M(r,c) << " ";
+			}
+			cout << endl;
+		}
+		cout << endl;
+
+	}
+
+	M.resize(0, 0);
+	return 1;
 }

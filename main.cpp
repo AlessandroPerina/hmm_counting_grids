@@ -23,6 +23,16 @@ int main(int argc, char** argv)
 		wdsize[d] = atoi(*(argv + dimensions + 2 + d));
 	}
 
+	/*
+	// Creo una matrice 4x4x2
+	DMatrix Minput = DMatrix::Random(5, 32);
+	cout << "(0,1): " << Minput(0, 1) << endl;
+	cout << "(0,2): " << Minput(0, 2) << endl;
+	cout << "(0,17): " << Minput(0, 17) << endl;
+	vector<int> coord{ 4, 4, 2 };
+	counting_grid::print(Minput, coord, 0);
+	*/
+
 	counting_grid CG(cgsize, wdsize, 2);
 
 
