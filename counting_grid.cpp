@@ -10,10 +10,10 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 	L = 1;
 	LW = 1;
 	for (size_t i = 0; i < cgsize.size(); i++)
-		L *= cgsize.at(0);
+		L *= cgsize[i];
 
 	for (size_t i = 0; i < wdsize.size(); i++)
-		LW *= wdsize.at(0);
+		LW *= wdsize[i];
 
 	// Initialization of pi --> use BOOST random number generator 
 	int randbase = 3;
