@@ -7,7 +7,7 @@ class counting_grid
 public:
 	PWMatrix pi;
 	PWMatrix h;
-	map<int*,int*> position_lookup; // position --> indeces of window
+	map<int,vector<int>> position_lookup; // position --> indeces of window
 
 	vector<int> cg_size;
 	vector<int> wd_size;
@@ -19,7 +19,6 @@ public:
 	counting_grid(vector<int>, vector<int>, int);
 	virtual ~counting_grid();
 
-	vector<int> get_index_window( vector<int> );
 	int sum_in_windows();
 
 	// Utility functions
