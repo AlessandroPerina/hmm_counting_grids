@@ -6,6 +6,7 @@
 #include <Eigen/Dense>
 #include <Eigen/SparseCore>
 #include <vector>
+#include <string>
 #include <assert.h>
 #endif
 

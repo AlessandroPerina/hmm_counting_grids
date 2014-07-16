@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 		offset *= *it;
 		dividi = (L / offset);
 		cout << "Dividi per: " << dividi << endl;
-		divisione_intera = (linear_index-1) / dividi;
+		divisione_intera = (linear_index) / dividi;
 		cout << "Divisione intera: " << divisione_intera << endl;	
 		pos.push_back( divisione_intera );
 		linear_index -= divisione_intera*dividi;
