@@ -68,7 +68,7 @@ corpus::corpus(string filename)
 		string tmp_match;
 		while (rit != rend) {
 			sscanf(rit->str().c_str(), "%10d:%10d", &word_id, &count);
-			counts.insert(d, word_id) = count;
+			counts.insert(d, word_id-1) = count;
 			++rit;
 		}
 		d++;

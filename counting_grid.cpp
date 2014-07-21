@@ -181,14 +181,12 @@ int counting_grid::set_pi(PWMatrix* new_pi)
 	return 0;
 }
 
-int counting_grid::get_pi(PWMatrix* pi)
+PWMatrix* counting_grid::get_pi()
 {
-	pi = &(this->pi);
-	return 0;
+	return &(this->pi);
 }
 
-int counting_grid::get_h(PWMatrix* h)
+PWMatrix* counting_grid::get_h()
 {
-	h = &(this->h);
-	return 0;
+	return &(this->h);
 }

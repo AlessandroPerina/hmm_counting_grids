@@ -28,8 +28,8 @@ public:
 	vector<int> sub2ind(int);
 	static int print(DMatrix, vector<int>, int);
 	int set_pi(PWMatrix*);
-	int get_pi(PWMatrix*);
-	int get_h(PWMatrix*);
+	PWMatrix* get_pi();
+	PWMatrix* get_h();
 
 private:
 	PWMatrix pi;
