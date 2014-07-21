@@ -1,5 +1,6 @@
 #include "general_header.h"
 #include "counting_grid.h"
+#include "corpus.h"
 #include <iostream>
 
 using namespace std;
@@ -15,6 +16,7 @@ int main(int argc, char** argv)
 	char* filename = *(argv + 1);
 	int dimensions = ( argc - 2 ) / 2;
 	cout << "You are learning a " << dimensions << "-dimensional Counting Grid " << endl;
+	cout << "Input file: " << (string) filename << endl;
 	vector<int> cgsize(dimensions);
 	vector<int> wdsize(dimensions);
 	for (int d = 0; d < dimensions; d++)
@@ -34,10 +36,10 @@ int main(int argc, char** argv)
 	*/
 
 	counting_grid CG(cgsize, wdsize, 2);
-
-
+	corpus cp( (string) filename);
 
 	cout << "Success!" << endl;
+	system("PAUSE");
 	return 0;
 }
 

@@ -146,10 +146,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\corpus.cpp" />
     <ClCompile Include="..\..\counting_grid.cpp" />
     <ClCompile Include="..\..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\corpus.h" />
     <ClInclude Include="..\..\counting_grid.h" />
     <ClInclude Include="..\..\general_header.h" />
   </ItemGroup>

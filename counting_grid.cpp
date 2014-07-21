@@ -65,10 +65,8 @@ counting_grid::counting_grid(vector<int> cgsize, vector<int> wdsize, int Z_init)
 	}
 
 	// Initialization of h
-	print(pi, cg_size, 0);
 	h = PWMatrix::Zero(Z, L);
 	this->sum_in_windows(); // Warning. The object is still under construction, so be sure that you have created everything...
-	print(h, cg_size, 0);
 	h.rowwise() /= (eps + h.colwise().sum());
 }
 
@@ -174,4 +172,23 @@ int counting_grid::print(DMatrix Minput, vector<int> siz, int z)
 
 	M.resize(0, 0);
 	return 1;
+}
+
+int counting_grid::set_pi(PWMatrix* new_pi)
+{
+	this->pi = *new_pi;
+	this->sum_in_windows();
+	return 0;
+}
+
+int counting_grid::get_pi(PWMatrix* pi)
+{
+	pi = &(this->pi);
+	return 0;
+}
+
+int counting_grid::get_h(PWMatrix* h)
+{
+	h = &(this->h);
+	return 0;
 }

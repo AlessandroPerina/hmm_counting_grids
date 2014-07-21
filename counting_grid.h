@@ -8,8 +8,6 @@ class counting_grid
 {
 
 public:
-	PWMatrix pi;
-	PWMatrix h;
 	map<int,vector<int>> position_lookup; // position --> indeces of window
 
 	vector<int> cg_size;
@@ -29,6 +27,13 @@ public:
 	int ind2sub(vector<int>);
 	vector<int> sub2ind(int);
 	static int print(DMatrix, vector<int>, int);
+	int set_pi(PWMatrix*);
+	int get_pi(PWMatrix*);
+	int get_h(PWMatrix*);
+
+private:
+	PWMatrix pi;
+	PWMatrix h;
 };
 
 #endif

@@ -21,12 +21,18 @@
     <ClCompile Include="..\..\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\corpus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\counting_grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\general_header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\corpus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
