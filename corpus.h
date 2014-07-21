@@ -10,6 +10,6 @@ public:
 
 	int T;
 	int Z;
-	readfile(string );
-
-}
+	corpus(string );
+	~corpus();
+};

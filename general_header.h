@@ -8,6 +8,8 @@
 #include <vector>
 #include <string>
 #include <assert.h>
+#include <fstream>
+#include <regex>
 #endif
 
 using namespace Eigen;
