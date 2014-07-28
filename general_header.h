@@ -10,6 +10,7 @@
 #include <assert.h>
 #include <fstream>
 #include <regex>
+#include <math.h>  
 #endif
 
 using namespace Eigen;

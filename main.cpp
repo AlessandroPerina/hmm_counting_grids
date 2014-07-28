@@ -1,6 +1,7 @@
 #include "general_header.h"
 #include "counting_grid.h"
 #include "corpus.h"
+
 #include <iostream>
 
 using namespace std;
@@ -35,11 +36,19 @@ int main(int argc, char** argv)
 	counting_grid::print(Minput, coord, 0);
 	*/
 
-	counting_grid CG(cgsize, wdsize, 2);
+
 	corpus cp( (string) filename);
+	counting_grid CG(cgsize, wdsize, cp.Z );
+
+	cout << "Prova matrix multiplication" << endl;
+	cout << "counts dimensions: " << cp.counts->rows() << " " << cp.counts->cols() << endl;
+	cout << "h dimensions: " << CG.get_h()->rows() << " " << CG.get_h()->cols() << endl;
+	DMatrix posterior = (*cp.counts)*(log(*(CG.get_h())).matrix());
+	counting_grid::print(posterior, cgsize, 0);
+
 
 	cout << "Success!" << endl;
-	system("PAUSE");
+	system("PAUSE"); // NOT PORTABLE! Don't do it
 	return 0;
 }
 

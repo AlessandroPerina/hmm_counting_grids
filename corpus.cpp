@@ -25,6 +25,7 @@ corpus::corpus(string filename)
 	}
 	T = d;
 
+
 	// Leggi i counts
 	// Sposto all'inizio del file
 	Z = 0;
@@ -34,7 +35,7 @@ corpus::corpus(string filename)
 	d = 0;
 	int word_id;
 	int count;
-	vector< map<int, int> > vector_counts(T);
+	vector_counts = new vector< map<int, int> > (T);
 
 	while (getline(in_file, line))
 	{
@@ -44,7 +45,7 @@ corpus::corpus(string filename)
 		string tmp_match;
 		while (rit != rend) {
 			sscanf(rit->str().c_str(), "%10d:%10d", &word_id, &count);
-			vector_counts[d].insert(pair<int, int>(word_id-1, count));
+			vector_counts->at(d).insert(pair<int, int>(word_id - 1, count));
 			if (word_id > Z)
 				Z = word_id;
 			++rit;
@@ -53,9 +54,11 @@ corpus::corpus(string filename)
 	}
 	cout << "Documents: " << T << endl;
 	cout << "Features: " << Z << endl;
+	this->Z = Z;
+	this->T = T;
 
 	// Genero la counts matrix perchè ora so quante feature ho!
-	SMatrix counts(T, Z);
+	counts = new SMatrix(T, Z);
 	in_file.clear();
 	in_file.seekg(0, std::ios::beg);
 
@@ -68,7 +71,7 @@ corpus::corpus(string filename)
 		string tmp_match;
 		while (rit != rend) {
 			sscanf(rit->str().c_str(), "%10d:%10d", &word_id, &count);
-			counts.insert(d, word_id-1) = count;
+			counts->insert(d, word_id - 1) = count;
 			++rit;
 		}
 		d++;

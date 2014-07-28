@@ -14,6 +14,6 @@ learning::learning(counting_grid* cg, int m_iter = 1, int no_p = 5, float thr = 
 int learning::EStep(counting_grid* cg, corpus* c)
 {
 	//this->Posterior = ( *(cg->get_pi()->matrix())*c->counts).array();
-
+	return 0;
 };
 

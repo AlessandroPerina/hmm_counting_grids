@@ -8,8 +8,8 @@ class corpus
 public:
 	string corpus_name;
 	map<int,string> document_names;
-	SMatrix counts; // Sparse Matrix
-	vector< map<int,int> > vector_counts;
+	SMatrix* counts; // Sparse Matrix
+	vector< map<int,int> >* vector_counts;
 
 	int T;
 	int Z;
