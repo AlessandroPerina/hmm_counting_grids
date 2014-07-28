@@ -46,6 +46,8 @@ int main(int argc, char** argv)
 	DMatrix posterior = (*cp.counts)*(log(*(CG.get_h())).matrix());
 	counting_grid::print(posterior, cgsize, 0);
 
+	posterior.array().colwise() -= posterior.array().rowwise().maxCoeff();
+	counting_grid::print(posterior, cgsize, 0);
 
 	cout << "Success!" << endl;
 	system("PAUSE"); // NOT PORTABLE! Don't do it
