@@ -17,3 +17,10 @@ int learning::EStep(counting_grid* cg, corpus* c)
 	return 0;
 };
 
+int learning::lognormalize(Array<float, Dynamic, Dynamic>* Mat, int side)
+{
+	Mat->array().colwise() -= Mat->array().rowwise().maxCoeff();
+	int norm_factor = eigen::sum( Mat->array().colwise() -= Mat->array().rowwise().maxCoeff());
+
+
+}
