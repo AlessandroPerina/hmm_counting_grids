@@ -17,10 +17,20 @@ int learning::EStep(counting_grid* cg, corpus* c)
 	return 0;
 };
 
-int learning::lognormalize(Array<float, Dynamic, Dynamic>* Mat, int side)
+
+
+int learning::lognormalizeRows(PWMatrix &MatArr )
+{	
+	// ATTENTION: This function lognormalize the ROWS of a eigen array
+	MatArr.colwise() -= MatArr.rowwise().maxCoeff();
+	MatArr.colwise() -= ((MatArr.exp()).rowwise().sum()).log();
+	return 0;
+}
+
+int learning::lognormalizeCols(PWMatrix &MatArr)
 {
-	Mat->array().colwise() -= Mat->array().rowwise().maxCoeff();
-	int norm_factor = eigen::sum( Mat->array().colwise() -= Mat->array().rowwise().maxCoeff());
-
-
+	// ATTENTION: This function lognormalize the ROWS of a eigen array
+	MatArr.rowwise() -= MatArr.colwise().maxCoeff();
+	MatArr.rowwise() -= ((MatArr.exp()).colwise().sum()).log();
+	return 0;
 }

@@ -17,6 +17,8 @@ public:
 	int MStep(counting_grid*);
 	int compute_loglikelihood(counting_grid*,corpus*);
 	int delete_posterior();
+	static int lognormalizeRows(PWMatrix&);
+	static int lognormalizeCols(PWMatrix&);
 
 private:
 	PWMatrix accumulator;

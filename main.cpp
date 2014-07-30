@@ -1,7 +1,7 @@
 #include "general_header.h"
 #include "counting_grid.h"
 #include "corpus.h"
-
+#include "learning.h"
 #include <iostream>
 
 using namespace std;
@@ -43,11 +43,21 @@ int main(int argc, char** argv)
 	cout << "Prova matrix multiplication" << endl;
 	cout << "counts dimensions: " << cp.counts->rows() << " " << cp.counts->cols() << endl;
 	cout << "h dimensions: " << CG.get_h()->rows() << " " << CG.get_h()->cols() << endl;
-	DMatrix posterior = (*cp.counts)*(log(*(CG.get_h())).matrix());
+	PWMatrix posterior = ((*cp.counts)*(log(*(CG.get_h())).matrix()));
 	counting_grid::print(posterior, cgsize, 0);
 
-	posterior.array().colwise() -= posterior.array().rowwise().maxCoeff();
+
+	posterior.colwise() -= posterior.rowwise().maxCoeff();
 	counting_grid::print(posterior, cgsize, 0);
+	
+	posterior.colwise() -= ((posterior.exp()).rowwise().sum()).log();
+	counting_grid::print(posterior, cgsize, 0);
+
+	posterior = ((*cp.counts)*(log(*(CG.get_h())).matrix()));
+	learning::lognormalizeRows( posterior );
+	counting_grid::print(posterior, cgsize, 0);
+
+	cout << posterior.exp().sum() << endl;
 
 	cout << "Success!" << endl;
 	system("PAUSE"); // NOT PORTABLE! Don't do it

@@ -148,12 +148,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\corpus.cpp" />
     <ClCompile Include="..\..\counting_grid.cpp" />
+    <ClCompile Include="..\..\learning.cpp" />
     <ClCompile Include="..\..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\corpus.h" />
     <ClInclude Include="..\..\counting_grid.h" />
     <ClInclude Include="..\..\general_header.h" />
+    <ClInclude Include="..\..\learning.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
